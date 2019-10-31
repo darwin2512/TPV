@@ -1,0 +1,74 @@
+{% extends "control/main.html" %}
+
+{% load static %}
+
+{% block title %}<title>Listado de Pedidos</title>{% endblock %}
+
+{% block content %}
+
+<div class="section__content section__content--p30">      
+
+        <div class="col-md-6 offset-md-3 mr-auto ml-auto">               
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">Datos del Pedido</h6>
+                        </div>
+
+                        <div style="margin-left:20px;margin-top:20px">
+                            <h4>Productos</h4>
+                        
+                            {% for producto in pedido.detallepedido_set.all %}
+                            <hr>                        
+                            <td><p><strong>Producto:</strong> {{producto.producto}}</p></td> 
+                            <td><p><strong>Cantidad:</strong> {{producto.cantidad}}</p></td>                           
+                            {% endfor %}
+                            <hr>
+
+                        </div>  
+                        
+                        <div class="card-body card-block text-center">                              
+                            <p><strong>No. de Pedido:</strong> {{ pedido.id }}</p>
+                            <p><strong>Total:</strong> Q{{ pedido.total }}</p>
+                            <p><strong>Estado:</strong> {{ pedido.estado }}</p>    
+                            <p><strong>Cliente:</strong> {{ pedido.cliente }}</p>  
+                            <p><strong>Observacion:</strong> {{ pedido.observacion }}</p>   
+                            <p><strong>Fecha:</strong> {{ pedido.fecha }}</p>                                
+                        </div>
+
+                            <div class="card-footer">
+                                <form action="{% url 'control:estado_pedido' pedido.id %}" method="post" id="pedido_form">
+                                    
+                                  <a href="{% url 'control:pedidos' %}"><button type="button" class="btn btn-secondary">Regresar</button></a>
+                                    
+                                  {% if user.is_staff or request.user.username == 'Cocinero' %}                                 
+                                  <button type="submit" class="btn btn-success float-right" style="display:none;" id="bListo">Listo</button>
+                                  {% endif %} 
+
+                                </form>
+                            </div>
+
+                      </div> 
+                        </form>
+                
+        </div>     
+        
+</div>
+
+  <script>
+      //Mostrar el botton de listo si estado = Pendiente
+      window.onload=function() {
+          var x = document.getElementById("bListo");
+
+          estado = "{{ pedido.estado }}";
+          console.log(estado);
+          
+          if (estado === "Pendiente") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
+          }
+        } 
+
+  </script>
+
+{% endblock content %}

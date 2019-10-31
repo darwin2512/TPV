@@ -1,0 +1,96 @@
+{% extends "control/main.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <style>
+        .titulo h1 {
+                text-align: center;
+                }
+
+        .logo img {
+                display:block;
+                margin:auto;
+                border-radius: 20px;
+                }
+    </style>
+
+    {% if user.is_staff %}
+    <div class="row">
+      
+      <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+
+          <a href="{% url 'control:productos' %}" style="text-decoration: none">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Productos</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">Listado de Productos</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-utensils fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-md-6 mb-4">
+          <div class="card border-left-primary shadow h-100 py-2">
+  
+            <a href="{% url 'control:pedidos' %}" style="text-decoration: none">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Pedidos</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">Listado de Pedidos</div>
+                </div>
+                <div class="col-auto">
+                  <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+            </a>
+  
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+    
+              <a href="{% url 'control:ventas' %}" style="text-decoration: none">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ventas</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">Reporte de Ventas</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-money-check-alt fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+              </a>
+    
+            </div>
+          </div>
+     
+    </div>
+    {% endif %}
+
+    <div class="titulo" text-align="center">
+        <h1>Monte Alba</h1>
+    </div>
+
+    <div class="logo" text-align="center">
+        <img src="{% static 'img/mo.jpg' %}" width="950" height="550">
+    </div>
+
+   
+
+  
+{% endblock content %}
